@@ -30,9 +30,9 @@ using namespace std;
 // need two POSCARs: POSCAR1 for bulk, POSCAR2 for defect
 void read_poscar(string bStrArrElem[10], int bNumArrElem[10], int &bNumElem,
 		int &bNumAtom, double &bUnivScal, double bArrLatVec[3][3],
-		double bArrAtomFrac[260][3], string vStrArrElem[10],
+		double bArrAtomFrac[500][3], string vStrArrElem[10],
 		int vNumArrElem[10], int &vNumElem, int &vNumAtom, double &vUnivScal,
-		double vArrLatVec[3][3], double vArrAtomFrac[260][3], char *FileName1,
+		double vArrLatVec[3][3], double vArrAtomFrac[500][3], char *FileName1,
 		char *FileName2) {
 	ifstream file1, file2;
 	istringstream str;
@@ -197,9 +197,9 @@ void read_poscar(string bStrArrElem[10], int bNumArrElem[10], int &bNumElem,
 
 // change fractional coordinates to Cartesian coordinates
 void frac_to_cart(int bNumAtom, double bUnivScal, double bArrLatVec[3][3],
-		double bArrAtomFrac[260][3], double bArrAtomCart[260][3], int vNumAtom,
-		double vUnivScal, double vArrLatVec[3][3], double vArrAtomFrac[260][3],
-		double vArrAtomCart[260][3]) {
+		double bArrAtomFrac[500][3], double bArrAtomCart[500][3], int vNumAtom,
+		double vUnivScal, double vArrLatVec[3][3], double vArrAtomFrac[500][3],
+		double vArrAtomCart[500][3]) {
 	for (int i = 0; i < 3; i++) {
 		bArrLatVec[i][0] = bArrLatVec[i][0] * bUnivScal;
 		bArrLatVec[i][1] = bArrLatVec[i][1] * bUnivScal;
@@ -292,10 +292,10 @@ int sum_array(int *arr, int n = 1) {
 }
 
 // calculate atomic index and species of the vacancy in bulk
-void find_vacancy(int bNumAtom, double bArrAtomFrac[260][3],
-		double bArrAtomCart[260][3], double bArrLatVec[3][3], int vNumAtom,
-		double vUnivScal, double vArrLatVec[3][3], double vArrAtomCart[260][3],
-		int &vAtomIndex, double bArrAtomLen[260], double vArrAtomLen[260],
+void find_vacancy(int bNumAtom, double bArrAtomFrac[500][3],
+		double bArrAtomCart[500][3], double bArrLatVec[3][3], int vNumAtom,
+		double vUnivScal, double vArrLatVec[3][3], double vArrAtomCart[500][3],
+		int &vAtomIndex, double bArrAtomLen[500], double vArrAtomLen[500],
 		int bNumElem, int bNumArrElem[10], string bStrArrElem[10],
 		string &vStrElem) {
 	int i, j;
@@ -335,9 +335,9 @@ void find_vacancy(int bNumAtom, double bArrAtomFrac[260][3],
 
 // calculate atomic indices, species, lengths of the shell
 void nn_calculator(int bNumAtom, string bStrArrElem[10], int bNumArrElem[10],
-		int bNumElem, double bArrAtomLen[260], string nnStrArrElem[50],
+		int bNumElem, double bArrAtomLen[500], string nnStrArrElem[50],
 		int nnNumArrElem[10], int bnnArrAtomIndex[50], double bnnArrAtomLen[50],
-		int vNumAtom, double vArrAtomLen[260], int vnnArrAtomIndex[50],
+		int vNumAtom, double vArrAtomLen[500], int vnnArrAtomIndex[50],
 		double vnnArrAtomLen[50], int &nnNumAtom, double dMin, double dMax) {
 	int Num = 0;
 	for (int i = 0; i < bNumAtom; i++) {
@@ -396,8 +396,8 @@ int main(int argc, char* argv[]) {
 	int bNumAtom = 0;            // # of atoms
 	double bUnivScal = 0;        // universal scaling parameter
 	double bArrLatVec[3][3];     // lattice vectors
-	double bArrAtomFrac[260][3]; // fractional atomic coordinates
-	double bArrAtomCart[260][3]; // Cartesian atomic coordinates
+	double bArrAtomFrac[500][3]; // fractional atomic coordinates
+	double bArrAtomCart[500][3]; // Cartesian atomic coordinates
 
 	/// data of defect
 	string vStrArrElem[10];      // atomic species
@@ -406,8 +406,8 @@ int main(int argc, char* argv[]) {
 	int vNumAtom = 0;            // # of atoms
 	double vUnivScal = 0;        // universal scaling parameter
 	double vArrLatVec[3][3];     // lattice vectors
-	double vArrAtomFrac[260][3]; // fractional atomic coordinates
-	double vArrAtomCart[260][3]; // Cartesian atomic coordinates
+	double vArrAtomFrac[500][3]; // fractional atomic coordinates
+	double vArrAtomCart[500][3]; // Cartesian atomic coordinates
 
 	/// data of vacancy
 	string vStrElem;             // atomic species of vacancy in bulk
@@ -417,10 +417,10 @@ int main(int argc, char* argv[]) {
 	int nnNumArrElem[10];        // # of atoms of each element in the shell
 	for (int i = 0; i < 10; i++)
 		nnNumArrElem[i] = 0;
-	double bArrAtomLen[260];     // bonding lengths of vacancy in bulk
+	double bArrAtomLen[500];     // bonding lengths of vacancy in bulk
 	int bnnArrAtomIndex[50];     // atomic indices in the shell of bulk
 	double bnnArrAtomLen[50];    // bonding lengths in the shell of bulk
-	double vArrAtomLen[260];   // bonding lengths of vacancy in defect
+	double vArrAtomLen[500];   // bonding lengths of vacancy in defect
 	int vnnArrAtomIndex[50];     // atomic indices in the shell of defect
 	double vnnArrAtomLen[50];    // bonding lengths in the shell of defect
 
