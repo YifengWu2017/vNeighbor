@@ -1,4 +1,5 @@
-# vneighbor.cpp - `g++ -o vneighbor vneighbor.cpp` to compile the code
+# vneighbor.cpp
+- `g++ -o vneighbor vneighbor.cpp` to compile the code
 
 ## Usage
 
