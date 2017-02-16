@@ -6,7 +6,7 @@
 - FileName1:   bulk supercell
 - FileName2: defect supercell
 
-e.g., 
+e.g.,
 
 - `vneighbor POSCAR1 POSCAR2 1.2 3.0` (for 1st NNs of fcc, a=3.54)
 - `vneighbor POSCAR1 POSCAR2 3.0 3.9` (for 2nd NNs of fcc, a=3.54)
