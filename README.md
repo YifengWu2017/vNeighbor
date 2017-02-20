@@ -38,9 +38,3 @@ The output file can be divided into four parts:
 3. The index of neighbor atoms within that shell for the vacancy. Index is the sequence in POSCAR.
 4. The distance between the neighbor atoms and the atom used to be in the bulk;
    The distance between the neighbor atoms and the vacancy.
-
-## Tricks in practice
-
-If you don't know the distance of 1st shell, just make a guess, like 1.0-4.0, the code will print all distances. Then you can see the distance of 1st, or even 2nd, neighbors.
-
-If you want to study only a certain type or types of atom in a crystal, delete the other types of atom from your POSCAR. Then use this code to calculate the neighborhood.
