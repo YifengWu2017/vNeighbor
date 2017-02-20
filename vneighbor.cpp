@@ -338,9 +338,9 @@ void find_vacancy(int bNumAtom, double bArrAtomFrac[500][3],
 // calculate atomic indices, species, lengths of the shell
 void nn_calculator(int bNumAtom, string bStrArrElem[10], int bNumArrElem[10],
 		int bNumElem, double bArrAtomLen[500], string nnStrArrElem[50],
-		int nnNumArrElem[10], int bnnArrAtomIndex[50], double bnnArrAtomLen[50],
-		int vNumAtom, double vArrAtomLen[500], int vnnArrAtomIndex[50],
-		double vnnArrAtomLen[50], int &nnNumAtom, double dMin, double dMax) {
+		int nnNumArrElem[10], int bnnArrAtomIndex[100], double bnnArrAtomLen[100],
+		int vNumAtom, double vArrAtomLen[500], int vnnArrAtomIndex[100],
+		double vnnArrAtomLen[100], int &nnNumAtom, double dMin, double dMax) {
 	int Num = 0;
 	for (int i = 0; i < bNumAtom; i++) {
 		if (bArrAtomLen[i] >= dMin && bArrAtomLen[i] <= dMax) {
@@ -420,11 +420,11 @@ int main(int argc, char* argv[]) {
 	for (int i = 0; i < 10; i++)
 		nnNumArrElem[i] = 0;
 	double bArrAtomLen[500];     // bonding lengths of vacancy in bulk
-	int bnnArrAtomIndex[50];     // atomic indices in the shell of bulk
-	double bnnArrAtomLen[50];    // bonding lengths in the shell of bulk
+	int bnnArrAtomIndex[100];     // atomic indices in the shell of bulk
+	double bnnArrAtomLen[100];    // bonding lengths in the shell of bulk
 	double vArrAtomLen[500];   // bonding lengths of vacancy in defect
-	int vnnArrAtomIndex[50];     // atomic indices in the shell of defect
-	double vnnArrAtomLen[50];    // bonding lengths in the shell of defect
+	int vnnArrAtomIndex[100];     // atomic indices in the shell of defect
+	double vnnArrAtomLen[100];    // bonding lengths in the shell of defect
 
 	char *FileName1, *FileName2; // names of input files
 	FileName1 = argv[1];
