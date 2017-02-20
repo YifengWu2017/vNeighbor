@@ -42,7 +42,9 @@ void read_poscar(string bStrArrElem[10], int bNumArrElem[10], int &bNumElem,
 	i = temp1 = temp2 = 0;
 
 	file1.open(FileName1);
-	if (file1) {
+	if (!file1)
+		cout << "File " << FileName1 << " NOT found!" << endl;
+	else {
 		getline(file1, line);
 		getline(file1, line);
 		str.str(line);
@@ -86,37 +88,38 @@ void read_poscar(string bStrArrElem[10], int bNumArrElem[10], int &bNumElem,
 		}
 		i = 0;
 		str.clear();
-	} else {
-		cout << "File " << FileName1 << " NOT found!" << endl;
-	}
-	while (bNumArrElem[i] && i < bNumElem) {
-		bNumAtom += bNumArrElem[i];
-		i++;
-	}
-	getline(file1, line);
-	for (i = 0; i < bNumAtom; i++) {
+
+		while (bNumArrElem[i] && i < bNumElem) {
+			bNumAtom += bNumArrElem[i];
+			i++;
+		}
 		getline(file1, line);
-		str.str(line);
-		if (str >> a >> b >> c) {
+		for (i = 0; i < bNumAtom; i++) {
+			getline(file1, line);
+			str.str(line);
+			if (str >> a >> b >> c) {
+				str.clear();
+				bArrAtomFrac[i][0] = a;
+				bArrAtomFrac[i][1] = b;
+				bArrAtomFrac[i][2] = c;
+				temp2++;
+			} else {
+				cout << FileName1 << ": Atomic coordinates not found!" << endl;
+				exit(1);
+			}
 			str.clear();
-			bArrAtomFrac[i][0] = a;
-			bArrAtomFrac[i][1] = b;
-			bArrAtomFrac[i][2] = c;
-			temp2++;
-		} else {
-			cout << FileName1 << ": Atomic coordinates not found!" << endl;
+		}
+		if (temp2 != bNumAtom) {
+			cout << FileName1 << ": # atoms do NOT match!" << endl;
 			exit(1);
 		}
-		str.clear();
+		i = temp1 = temp2 = 0;
 	}
-	if (temp2 != bNumAtom) {
-		cout << FileName1 << ": # atoms do NOT match!" << endl;
-		exit(1);
-	}
-	i = temp1 = temp2 = 0;
 
 	file2.open(FileName2);
-	if (file2) {
+	if (!file2)
+		cout << "File " << FileName2 << " NOT found!" << endl;
+	else {
 		getline(file2, line);
 		getline(file2, line);
 		str.str(line);
@@ -160,32 +163,31 @@ void read_poscar(string bStrArrElem[10], int bNumArrElem[10], int &bNumElem,
 		}
 		i = 0;
 		str.clear();
-	} else {
-		cout << "File " << FileName2 << " NOT found!" << endl;
-	}
-	while (vNumArrElem[i] && i < vNumElem) {
-		vNumAtom += vNumArrElem[i];
-		i++;
-	}
-	getline(file2, line);
-	for (i = 0; i < vNumAtom; i++) {
+
+		while (vNumArrElem[i] && i < vNumElem) {
+			vNumAtom += vNumArrElem[i];
+			i++;
+		}
 		getline(file2, line);
-		str.str(line);
-		if (str >> a >> b >> c) {
+		for (i = 0; i < vNumAtom; i++) {
+			getline(file2, line);
+			str.str(line);
+			if (str >> a >> b >> c) {
+				str.clear();
+				vArrAtomFrac[i][0] = a;
+				vArrAtomFrac[i][1] = b;
+				vArrAtomFrac[i][2] = c;
+				temp2++;
+			} else {
+				cout << FileName2 << ": Atomic coordinates NOT found!" << endl;
+				exit(1);
+			}
 			str.clear();
-			vArrAtomFrac[i][0] = a;
-			vArrAtomFrac[i][1] = b;
-			vArrAtomFrac[i][2] = c;
-			temp2++;
-		} else {
-			cout << FileName2 << ": Atomic coordinates NOT found!" << endl;
+		}
+		if (temp2 != vNumAtom) {
+			cout << FileName2 << ": # atoms NOT correct!" << endl;
 			exit(1);
 		}
-		str.clear();
-	}
-	if (temp2 != vNumAtom) {
-		cout << FileName2 << ": # atoms NOT correct!" << endl;
-		exit(1);
 	}
 
 	if (bNumElem != vNumElem) {
